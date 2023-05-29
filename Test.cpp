@@ -1,12 +1,10 @@
-#include "sources/MagicalContainer.h"
+#include "sources/MagicalContainer.hpp"
 #include "doctest.h"
-#include "sources/AscendingIterator.hpp"
-#include "sources/SideCrossIterator.hpp"
-#include "sources/PrimeIterator.hpp"
-TEST_SUITE("Testing MagicalContainer functionality")
+using namespace ariel;
+TEST_CASE("Testing MagicalContainer functionality")
 {
 
-    TEST_CASE("Test addElement() and size()")
+    SUBCASE("Test addElement() and size()")
     {
         MagicalContainer mc;
         mc.addElement(10);
@@ -15,7 +13,7 @@ TEST_SUITE("Testing MagicalContainer functionality")
         CHECK(mc.size() == 2); // Size should be 2 after adding another element
     }
 
-    TEST_CASE("Test removeElement()")
+    SUBCASE("Test removeElement()")
     {
         MagicalContainer mc;
         mc.addElement(10);
@@ -34,7 +32,7 @@ TEST_CASE("Testing AscendingIterator")
     container.addElement(9);
     container.addElement(3);
 
-    AscendingIterator ascIter(container);
+    MagicalContainer::AscendingIterator ascIter(container);
 
     SUBCASE("Testing iteration")
     {
@@ -96,7 +94,7 @@ TEST_CASE("Testing AscendingIterator")
     SUBCASE("Empty Container")
     {
         MagicalContainer emptyContainer;
-        AscendingIterator ascIter(emptyContainer);
+        MagicalContainer::AscendingIterator ascIter(emptyContainer);
         CHECK(ascIter.begin() == ascIter.end());
     }
 
@@ -104,7 +102,7 @@ TEST_CASE("Testing AscendingIterator")
     {
         MagicalContainer singleElementContainer;
         singleElementContainer.addElement(5);
-        AscendingIterator ascIter(singleElementContainer);
+        MagicalContainer::AscendingIterator ascIter(singleElementContainer);
         CHECK(ascIter.begin() != ascIter.end());
         ++ascIter;
         CHECK(ascIter.begin() == ascIter.end());
@@ -114,7 +112,7 @@ TEST_CASE("Testing AscendingIterator")
     {
         MagicalContainer container;
         container.addElement(1);
-        AscendingIterator ascIter(container);
+        MagicalContainer::AscendingIterator ascIter(container);
         container.addElement(2);
         CHECK(*ascIter == 1);
         ++ascIter;
@@ -126,7 +124,7 @@ TEST_CASE("Testing AscendingIterator")
         MagicalContainer container;
         container.addElement(1);
         container.addElement(2);
-        AscendingIterator ascIter(container);
+        MagicalContainer::AscendingIterator ascIter(container);
         container.removeElement(1);
         CHECK(*ascIter == 2);
     }
@@ -135,11 +133,11 @@ TEST_CASE("Testing AscendingIterator")
     {
         MagicalContainer container1;
         container1.addElement(1);
-        AscendingIterator ascIter1(container1);
+        MagicalContainer::AscendingIterator ascIter1(container1);
 
         MagicalContainer container2;
         container2.addElement(2);
-        AscendingIterator ascIter2(container2);
+        MagicalContainer::AscendingIterator ascIter2(container2);
 
         CHECK(ascIter1 != ascIter2);
     }
@@ -154,7 +152,7 @@ TEST_CASE("Testing PrimeIterator")
     container.addElement(7);
     container.addElement(5);
 
-    PrimeIterator prIter(container);
+    MagicalContainer::PrimeIterator prIter(container);
 
     SUBCASE("Testing iteration")
     {
@@ -215,7 +213,7 @@ TEST_CASE("Testing PrimeIterator")
     SUBCASE("Empty Container")
     {
         MagicalContainer emptyContainer;
-        PrimeIterator prIter(emptyContainer);
+        MagicalContainer::PrimeIterator prIter(emptyContainer);
         CHECK(prIter.begin() == prIter.end());
     }
 
@@ -223,7 +221,7 @@ TEST_CASE("Testing PrimeIterator")
     {
         MagicalContainer singleElementContainer;
         singleElementContainer.addElement(4); // not a prime number
-        PrimeIterator prIter(singleElementContainer);
+        MagicalContainer::PrimeIterator prIter(singleElementContainer);
         CHECK(prIter.begin() == prIter.end()); // should have no elements to iterate over
     }
 
@@ -231,7 +229,7 @@ TEST_CASE("Testing PrimeIterator")
     {
         MagicalContainer singleElementContainer;
         singleElementContainer.addElement(5); // a prime number
-        PrimeIterator prIter(singleElementContainer);
+        MagicalContainer::PrimeIterator prIter(singleElementContainer);
         CHECK(prIter.begin() != prIter.end()); // should have one element to iterate over
         ++prIter;
         CHECK(prIter.begin() == prIter.end());
@@ -241,7 +239,7 @@ TEST_CASE("Testing PrimeIterator")
     {
         MagicalContainer container;
         container.addElement(2); // a prime number
-        PrimeIterator prIter(container);
+        MagicalContainer::PrimeIterator prIter(container);
         container.addElement(3); // another prime number
         CHECK(*prIter == 2);
         ++prIter;
@@ -254,7 +252,7 @@ TEST_CASE("Testing PrimeIterator")
         container.addElement(2);
         container.addElement(3);
         container.addElement(5);
-        PrimeIterator prIter(container);
+        MagicalContainer::PrimeIterator prIter(container);
         container.removeElement(2);
         CHECK(*prIter == 3); // Check that prIter skips the removed element
         ++prIter;
@@ -265,11 +263,11 @@ TEST_CASE("Testing PrimeIterator")
     {
         MagicalContainer container1;
         container1.addElement(2);
-        PrimeIterator prIter1(container1);
+        MagicalContainer::PrimeIterator prIter1(container1);
 
         MagicalContainer container2;
         container2.addElement(3);
-        PrimeIterator prIter2(container2);
+        MagicalContainer::PrimeIterator prIter2(container2);
 
         CHECK(prIter1 != prIter2);
     }
@@ -284,7 +282,7 @@ TEST_CASE("Testing SideCrossIterator")
     container.addElement(4);
     container.addElement(5);
 
-    SideCrossIterator scIter(container);
+    MagicalContainer::SideCrossIterator scIter(container);
 
     SUBCASE("Testing iteration")
     {
@@ -341,7 +339,7 @@ TEST_CASE("Testing SideCrossIterator")
     SUBCASE("Empty Container")
     {
         MagicalContainer emptyContainer;
-        SideCrossIterator scIter(emptyContainer);
+        MagicalContainer::SideCrossIterator scIter(emptyContainer);
         CHECK(scIter.begin() == scIter.end());
     }
 
@@ -349,7 +347,7 @@ TEST_CASE("Testing SideCrossIterator")
     {
         MagicalContainer singleElementContainer;
         singleElementContainer.addElement(7);
-        SideCrossIterator scIter(singleElementContainer);
+        MagicalContainer::SideCrossIterator scIter(singleElementContainer);
         CHECK(scIter.begin() != scIter.end()); // should have one element to iterate over
         ++scIter;
         CHECK(scIter.begin() == scIter.end());
@@ -359,7 +357,7 @@ TEST_CASE("Testing SideCrossIterator")
     {
         MagicalContainer container;
         container.addElement(1);
-        SideCrossIterator scIter(container);
+        MagicalContainer::SideCrossIterator scIter(container);
         container.addElement(2);
         CHECK(*scIter == 1);
         ++scIter;
@@ -371,7 +369,7 @@ TEST_CASE("Testing SideCrossIterator")
         MagicalContainer container;
         container.addElement(1);
         container.addElement(2);
-        SideCrossIterator scIter(container);
+        MagicalContainer::SideCrossIterator scIter(container);
         container.removeElement(1);
         CHECK(*scIter == 2);
     }
@@ -380,11 +378,11 @@ TEST_CASE("Testing SideCrossIterator")
     {
         MagicalContainer container1;
         container1.addElement(1);
-        SideCrossIterator scIter1(container1);
+        MagicalContainer::SideCrossIterator scIter1(container1);
 
         MagicalContainer container2;
         container2.addElement(2);
-        SideCrossIterator scIter2(container2);
+        MagicalContainer::SideCrossIterator scIter2(container2);
 
         CHECK(scIter1 != scIter2);
     }
