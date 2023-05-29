@@ -21,6 +21,7 @@ namespace ariel
         {
         public:
             // Constructors and destructor
+            AscendingIterator();
             AscendingIterator(const MagicalContainer &container);
             AscendingIterator(const AscendingIterator &other);
             ~AscendingIterator();
@@ -53,6 +54,7 @@ namespace ariel
         {
         public:
             // Constructors and destructor
+            PrimeIterator();
             PrimeIterator(const MagicalContainer &container);
             PrimeIterator(const PrimeIterator &other);
             ~PrimeIterator();
@@ -85,6 +87,7 @@ namespace ariel
         {
         public:
             // Constructors and destructor
+            SideCrossIterator();
             SideCrossIterator(const MagicalContainer &container);
             SideCrossIterator(const SideCrossIterator &other);
             ~SideCrossIterator();
